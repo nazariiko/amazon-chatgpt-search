@@ -47,6 +47,10 @@ app.get('/search', async (req, res) => {
   res.json(top3Products)
 })
 
+app.get('/test', (req, res) => {
+  res.send('<h2>Working</h2>')
+})
+
 
 app.listen(PORT, () => {
   console.log('Server runs');
