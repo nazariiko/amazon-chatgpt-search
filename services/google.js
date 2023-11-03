@@ -5,11 +5,12 @@ export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
     try {
       const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--disable-setuid-sandbox"],
-        'ignoreHTTPSErrors': true
-      });
+      // const browser = await puppeteer.launch({
+      //   headless: true,
+      //   args: ["--disable-setuid-sandbox"],
+      //   'ignoreHTTPSErrors': true
+      // });
+      const browser = await puppeteer.launch({});
       let page = await browser.newPage();
       await page.goto(url);
 
@@ -39,11 +40,12 @@ export const getSearchResult = (text) => {
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--disable-setuid-sandbox"],
-        'ignoreHTTPSErrors': true
-      });
+      // const browser = await puppeteer.launch({
+      //   headless: true,
+      //   args: ["--disable-setuid-sandbox"],
+      //   'ignoreHTTPSErrors': true
+      // });
+      const browser = await puppeteer.launch({});
       let page = await browser.newPage();
       await page.goto(link);
   
