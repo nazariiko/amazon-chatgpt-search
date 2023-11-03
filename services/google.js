@@ -3,10 +3,9 @@ import puppeteer from 'puppeteer';
 
 export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
-    let browser;
     try {
       const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
-      browser = await puppeteer.launch({
+      const browser = await puppeteer.launch({
         headless: true,
         args: ["--disable-setuid-sandbox"],
         'ignoreHTTPSErrors': true
@@ -32,7 +31,6 @@ export const getSearchResult = (text) => {
       const isProduct = link.includes('/dp/')
       resolve({ isProduct, link })
     } catch (error) {
-      await browser.close();
       reject(error)
     }
   })
@@ -40,9 +38,8 @@ export const getSearchResult = (text) => {
 
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
-    let browser;
     try {
-      browser = await puppeteer.launch({
+      const browser = await puppeteer.launch({
         headless: true,
         args: ["--disable-setuid-sandbox"],
         'ignoreHTTPSErrors': true
@@ -69,7 +66,6 @@ export const parseAmazonProducts = (link) => {
   
       resolve(searchResults);
     } catch (error) {
-      await browser.close();
       reject(error)
     }
   })
