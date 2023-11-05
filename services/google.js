@@ -4,6 +4,7 @@ import puppeteer from 'puppeteer';
 export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log('AA');
       const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
       const browser = await puppeteer.launch({
         headless: true,
