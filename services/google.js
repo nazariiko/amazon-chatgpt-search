@@ -40,7 +40,7 @@ export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     const browser = await puppeteer.launch({
       // headless: true,
-      // args: ['--no-sandbox'],
+      args: ['--no-sandbox'],
       // 'ignoreHTTPSErrors': true,
       executablePath: '/usr/bin/chromium-browser'
     });
