@@ -8,13 +8,12 @@ export const getSearchResult = (text) => {
       const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox'],
-        // 'ignoreHTTPSErrors': true
+        'ignoreHTTPSErrors': true
       });
       let page = await browser.newPage();
       await page.goto(url);
 
       const searchResults = await page.evaluate(() => {
-        console.log('evaluate');
         const results = [];
         document.querySelectorAll('.g').forEach((result) => {
           const title = result.querySelector('h3').textContent;
@@ -26,6 +25,7 @@ export const getSearchResult = (text) => {
       });
       
       await browser.close();
+      console.log(searchResults);
 
       const fisrtResult = searchResults[0]
       const link = fisrtResult.link
@@ -42,10 +42,11 @@ export const parseAmazonProducts = (link) => {
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox'],
-      // 'ignoreHTTPSErrors': true
+      'ignoreHTTPSErrors': true
     });
     let page = await browser.newPage();
     await page.goto(link);
+    console.log(link);
 
     const searchResults = await page.evaluate(() => {
       const results = [];
