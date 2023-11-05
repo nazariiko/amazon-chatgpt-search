@@ -36,7 +36,7 @@ export const getSearchResult = (text) => {
 
       let link = productLink.link;
       if (!link.includes('s?k=')) {
-        link = `https://www.amazon.com/60th-birthday-gifts-women/s?k=${text.split(' ').join('+')}`
+        link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
       }
 
       resolve(link)
