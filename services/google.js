@@ -3,36 +3,32 @@ import puppeteer from 'puppeteer';
 
 export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
-    try {
-      const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: ["--disable-setuid-sandbox"],
-        'ignoreHTTPSErrors': true
+    const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--disable-setuid-sandbox"],
+      'ignoreHTTPSErrors': true
+    });
+    let page = await browser.newPage();
+    await page.goto(url);
+
+    const searchResults = await page.evaluate(() => {
+      const results = [];
+      document.querySelectorAll('.g').forEach((result) => {
+        const title = result.querySelector('h3').textContent;
+        const link = result.querySelector('a').getAttribute('href');
+        results.push({ title, link });
       });
-      let page = await browser.newPage();
-      await page.goto(url);
 
-      const searchResults = await page.evaluate(() => {
-        const results = [];
-        document.querySelectorAll('.g').forEach((result) => {
-          const title = result.querySelector('h3').textContent;
-          const link = result.querySelector('a').getAttribute('href');
-          results.push({ title, link });
-        });
+      return results;
+    });
+    
+    await browser.close();
 
-        return results;
-      });
-      
-      await browser.close();
-
-      const fisrtResult = searchResults[0]
-      const link = fisrtResult.link
-      const isProduct = link.includes('/dp/')
-      resolve({ isProduct, link })
-    } catch (error) {
-      reject(error)
-    }
+    const fisrtResult = searchResults[0]
+    const link = fisrtResult.link
+    const isProduct = link.includes('/dp/')
+    resolve({ isProduct, link })
   })
 }
 
