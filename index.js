@@ -19,7 +19,7 @@ const chatgptServiceInstance = new ChatGPTService();
 app.get('/search', async (req, res) => {
   const dateStart = new Date()
   const text = req.query.text;
-  const searchTerm = await getSimpleSearchTerm(text);
+  const searchTerm = await chatgptServiceInstance.getSimpleSearchTerm(text);
 
   let productResults;
 
