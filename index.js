@@ -17,33 +17,29 @@ const chatgptServiceInstance = new ChatGPTService();
 
 
 app.get('/search', async (req, res) => {
-  try {
-    const dateStart = new Date()
-    const text = req.query.text;
-    const searchTerm = await chatgptServiceInstance.getSimpleSearchTerm(text);
+  const dateStart = new Date()
+  const text = req.query.text;
+  const searchTerm = await getSimpleSearchTerm(text);
 
-    let productResults;
+  let productResults;
 
-    const link = await getSearchResult(searchTerm);
-    productResults = await parseAmazonProducts(link)
+  const link = await getSearchResult(searchTerm);
+  productResults = await parseAmazonProducts(link)
 
-    // productResults = await getProducts(searchTerm)
+  // productResults = await getProducts(searchTerm)
 
-    const bestMatchesProductsIndexes = await chatgptServiceInstance.getBestMatchesProducts(text, productResults);
-    const finalProducts = [];
-    bestMatchesProductsIndexes.forEach(index => {
-      finalProducts.push(productResults[+index - 1])
-    })
+  const bestMatchesProductsIndexes = await chatgptServiceInstance.getBestMatchesProducts(text, productResults);
+  const finalProducts = [];
+  bestMatchesProductsIndexes.forEach(index => {
+    finalProducts.push(productResults[+index - 1])
+  })
 
-    const top3Products = finalProducts.slice(0, 3)
+  const top3Products = finalProducts.slice(0, 3)
 
-    const dateEnd = new Date()
-    const time = dateEnd - dateStart;
-    console.log(time / 1000);
-    res.json({ status: 200, products: top3Products, error: null })
-  } catch (error) {
-    res.json({ status: 400, error: error, products: null })
-  }
+  const dateEnd = new Date()
+  const time = dateEnd - dateStart;
+  console.log(time / 1000);
+  res.json({ status: 200, products: top3Products, error: null })
 })
 
 app.get('/test', (req, res) => {
