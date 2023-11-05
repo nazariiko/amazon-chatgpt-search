@@ -41,7 +41,10 @@ export const parseAmazonProducts = (link) => {
     const browser = await puppeteer.launch({
       headless: false,
       args: ['--no-sandbox'],
-      executablePath: '/usr/bin/chromium-browser'
+      executablePath: '/usr/bin/chromium-browser',
+      env: {
+        DISPLAY: ":10.0"
+      },
     });
     let page = await browser.newPage();
     await page.goto(link);
