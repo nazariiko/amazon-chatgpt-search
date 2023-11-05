@@ -6,7 +6,7 @@ export const getSearchResult = (text) => {
     const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--disable-setuid-sandbox"],
+      // args: ["--disable-setuid-sandbox"],
       'ignoreHTTPSErrors': true
     });
     let page = await browser.newPage();
@@ -37,7 +37,7 @@ export const parseAmazonProducts = (link) => {
     try {
       const browser = await puppeteer.launch({
         headless: true,
-        args: ["--disable-setuid-sandbox"],
+        // args: ["--disable-setuid-sandbox"],
         'ignoreHTTPSErrors': true
       });
       let page = await browser.newPage();
