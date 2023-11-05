@@ -47,13 +47,6 @@ export const parseAmazonProducts = (link) => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36')
     await page.goto(link);
 
-    const data = await page.evaluate(() => document.querySelector('body').outerHTML);
-    console.log(data);
-
-    const divCount1 = await page.$$eval('.s-result-item', divs => divs.length);
-    console.log(divCount1);
-    console.log(link);
-
     const searchResults = await page.evaluate(() => {
       debugger
       const results = [];
