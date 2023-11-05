@@ -40,16 +40,15 @@ export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     const browser = await puppeteer.launch({
       // headless: true,
-      args: ['--no-sandbox'],
-      'ignoreHTTPSErrors': true,
-      devtools: true
+      // args: ['--no-sandbox'],
+      // 'ignoreHTTPSErrors': true,
+      executablePath: '/usr/bin/chromium-browser'
     });
     let page = await browser.newPage();
     await page.goto(link);
     console.log(link);
 
     const searchResults = await page.evaluate(() => {
-      debugger;
       const results = [];
       [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
         const a = result.getElementsByTagName('h2')[0].querySelector('a')
