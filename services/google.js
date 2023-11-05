@@ -44,7 +44,7 @@ export const parseAmazonProducts = (link) => {
       'ignoreHTTPSErrors': true,
     });
     let page = await browser.newPage();
-    await page.goto(link);
+    await page.goto('https://youtube.com');
     
     const divCount1 = await page.$$eval('.s-result-item[data-component-type="s-search-result"]', divs => divs.length);
     console.log(divCount1);
