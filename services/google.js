@@ -39,14 +39,12 @@ export const getSearchResult = (text) => {
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ['--no-sandbox'],
-      executablePath: '/usr/bin/chromium-browser',
-      env: {
-        DISPLAY: ":10.0"
-      },
+      'ignoreHTTPSErrors': true,
     });
     let page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36')
     await page.goto(link);
 
     const data = await page.evaluate(() => document.querySelector('body').outerHTML);
