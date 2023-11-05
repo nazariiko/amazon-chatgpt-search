@@ -22,8 +22,6 @@ app.get('/search', async (req, res) => {
     const text = req.query.text;
     const searchTerm = await chatgptServiceInstance.getSimpleSearchTerm(text);
 
-    console.log('chatgpt-1');
-
     let productResults;
 
     const link = await getSearchResult(searchTerm);
