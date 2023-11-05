@@ -4,7 +4,6 @@ import puppeteer from 'puppeteer';
 export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log('AA');
       const url = `https://www.google.com/search?q=${text} site:www.amazon.com`
       const browser = await puppeteer.launch({
         headless: true,
@@ -15,6 +14,7 @@ export const getSearchResult = (text) => {
       await page.goto(url);
 
       const searchResults = await page.evaluate(() => {
+        console.log('evaluate');
         const results = [];
         document.querySelectorAll('.g').forEach((result) => {
           const title = result.querySelector('h3').textContent;
@@ -22,11 +22,11 @@ export const getSearchResult = (text) => {
           results.push({ title, link });
         });
 
-        console.log(results, 'results');
         return results;
       });
       
       await browser.close();
+      console.log(searchResults, 'searchResults');
 
       const fisrtResult = searchResults[0]
       const link = fisrtResult.link
