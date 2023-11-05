@@ -52,6 +52,7 @@ export const parseAmazonProducts = (link) => {
 
     const divCount1 = await page.$$eval('.s-result-item', divs => divs.length);
     console.log(divCount1);
+    console.log(link);
 
     const searchResults = await page.evaluate(() => {
       debugger
