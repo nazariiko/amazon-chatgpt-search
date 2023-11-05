@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import ChatGPTService from './services/chatgpt.js';
-import { getSearchResult, parseAmazonProducts } from './services/google.js';
+import { getSearchResult, parseAmazonProducts, parseAmazonProducts2 } from './services/google.js';
 import { getProducts } from './services/amazon.js';
 
 dotenv.config()

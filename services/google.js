@@ -1,5 +1,6 @@
 import axios from 'axios';
 import puppeteer from 'puppeteer';
+import { JSDOM } from 'jsdom';
 
 export const getSearchResult = (text) => {
   return new Promise(async (resolve, reject) => {
@@ -78,5 +79,25 @@ export const parseAmazonProducts = (link) => {
     await browser.close();
 
     resolve(searchResults);
+  })
+}
+
+export const parseAmazonProducts2 = (link) => {
+  return new Promise(async (resolve, reject) => {
+    const response = await axios.get(`https://api.scraperapi.com/?api_key=${process.env.SCRAPPER_API}&url=${link}`)
+    const html = response.data;
+    const dom = new JSDOM(html);
+    const results = [];
+    const els = dom.window.document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')
+    Array.from(els).filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
+      const a = result.getElementsByTagName('h2')[0].querySelector('a')
+      const title = a.getElementsByTagName('span')[0]?.innerHTML
+      const link = 'https://www.amazon.com' + a.getAttribute('href');
+      const imageUrl = result.getElementsByTagName('img')[0]?.src
+      const priceEl = result.querySelector('.a-price .a-offscreen')
+      const price = priceEl ? priceEl.innerHTML : ''
+      results.push({ link, title, imageUrl, price });
+    });
+    resolve(results)
   })
 }
