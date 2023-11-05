@@ -44,14 +44,14 @@ export const parseAmazonProducts = (link) => {
       'ignoreHTTPSErrors': true,
     });
     let page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36')
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36')
     await page.goto(link);
-    
+
+    const data = await page.evaluate(() => document.querySelector('body').outerHTML);
+    console.log(data);
+
     const divCount1 = await page.$$eval('.s-result-item', divs => divs.length);
     console.log(divCount1);
-
-    // const data = await page.evaluate(() => document.querySelector('body').outerHTML);
-    // console.log(data);
 
     const searchResults = await page.evaluate(() => {
       debugger
