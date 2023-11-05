@@ -12,6 +12,7 @@ export default class ChatGPTService {
   getSimpleSearchTerm = (text) => {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log('chatgpt-1');
         const completion = await this.openai.chat.completions.create({
           messages: [{ role: "system", content: `Provide a simple product search term for google: "${text}"? Don't write any other text.` }],
           model: "gpt-4",
