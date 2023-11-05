@@ -25,7 +25,6 @@ export const getSearchResult = (text) => {
       });
       
       await browser.close();
-      console.log(searchResults);
 
       const fisrtResult = searchResults[0]
       const link = fisrtResult.link
@@ -40,15 +39,17 @@ export const getSearchResult = (text) => {
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     const browser = await puppeteer.launch({
-      headless: true,
+      // headless: true,
       args: ['--no-sandbox'],
-      'ignoreHTTPSErrors': true
+      'ignoreHTTPSErrors': true,
+      devtools: true
     });
     let page = await browser.newPage();
     await page.goto(link);
     console.log(link);
 
     const searchResults = await page.evaluate(() => {
+      debugger;
       const results = [];
       [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
         const a = result.getElementsByTagName('h2')[0].querySelector('a')
