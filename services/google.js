@@ -41,8 +41,7 @@ export const parseAmazonProducts = (link) => {
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox'],
-      // 'ignoreHTTPSErrors': true,
-      executablePath: '/usr/bin/chromium-browser'
+      'ignoreHTTPSErrors': true,
     });
     let page = await browser.newPage();
     await page.goto(link);
@@ -50,7 +49,7 @@ export const parseAmazonProducts = (link) => {
     const divCount1 = await page.$$eval('.s-result-item[data-component-type="s-search-result"]', divs => divs.length);
     console.log(divCount1);
 
-    const divCount2 = await page.$$eval('.s-result-item]', divs => divs.length);
+    const divCount2 = await page.$$eval('.s-result-item', divs => divs.length);
     console.log(divCount2);
 
     const searchResults = await page.evaluate(() => {
