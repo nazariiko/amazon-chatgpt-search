@@ -25,7 +25,6 @@ app.get('/search', async (req, res) => {
     let productResults;
 
     const link = await getSearchResult(searchTerm);
-    console.log(link);
     productResults = await parseAmazonProducts(link)
 
     // productResults = await getProducts(searchTerm)
