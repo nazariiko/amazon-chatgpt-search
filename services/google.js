@@ -49,8 +49,8 @@ export const parseAmazonProducts = (link) => {
     const divCount1 = await page.$$eval('.s-result-item[data-component-type="s-search-result"]', divs => divs.length);
     console.log(divCount1);
 
-    const divCount2 = await page.$$eval('.s-result-item', divs => divs.length);
-    console.log(divCount2);
+    const data = await page.evaluate(() => document.querySelector('body').outerHTML);
+    console.log(data);
 
     const searchResults = await page.evaluate(() => {
       debugger
