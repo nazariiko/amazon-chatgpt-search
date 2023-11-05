@@ -32,6 +32,7 @@ app.get('/search', async (req, res) => {
     }
 
     // productResults = await getProducts(searchTerm)
+    console.log(productResults, 'productResults');
 
     const bestMatchesProductsIndexes = await chatgptServiceInstance.getBestMatchesProducts(text, productResults);
     const finalProducts = [];

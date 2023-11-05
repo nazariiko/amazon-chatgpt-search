@@ -46,6 +46,8 @@ export const parseAmazonProducts = (link) => {
     let page = await browser.newPage();
     await page.goto(link);
 
+    console.log(link, 'parseAmazonProducts');
+
     const searchResults = await page.evaluate(() => {
       const results = [];
       [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
