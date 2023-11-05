@@ -39,11 +39,9 @@ export const getSearchResult = (text) => {
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
     const browser = await puppeteer.launch({
-      // headless: true,
+      headless: true,
       args: ['--no-sandbox'],
-      // 'ignoreHTTPSErrors': true,
-      executablePath: '/usr/bin/chromium-browser',
-      devtools: true,
+      'ignoreHTTPSErrors': true
     });
     let page = await browser.newPage();
     await page.goto(link);
@@ -52,7 +50,8 @@ export const parseAmazonProducts = (link) => {
     const searchResults = await page.evaluate(() => {
       debugger
       const results = [];
-      [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
+      const els = document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')
+      Array.from(els).filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
         const a = result.getElementsByTagName('h2')[0].querySelector('a')
         const title = a.getElementsByTagName('span')[0]?.innerText
         const link = 'https://www.amazon.com' + a.getAttribute('href');
