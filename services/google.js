@@ -44,7 +44,7 @@ export const parseAmazonProducts = (link) => {
       'ignoreHTTPSErrors': true,
     });
     let page = await browser.newPage();
-    await page.goto('https://amazon.com');
+    await page.goto('https://www.amazon.com/s?k=cars&crid=4L3WNE1INH2Q&sprefix=cars%2Caps%2C188&ref=nb_sb_noss_1');
     
     const divCount1 = await page.$$eval('.s-result-item[data-component-type="s-search-result"]', divs => divs.length);
     console.log(divCount1);
