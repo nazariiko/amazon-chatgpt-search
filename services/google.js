@@ -14,7 +14,6 @@ export const getSearchResult = (text) => {
       await page.goto(url);
 
       const searchResults = await page.evaluate(() => {
-        console.log('evaluate');
         const results = [];
         document.querySelectorAll('.g').forEach((result) => {
           const title = result.querySelector('h3').textContent;
@@ -26,7 +25,6 @@ export const getSearchResult = (text) => {
       });
       
       await browser.close();
-      console.log(searchResults, 'searchResults');
 
       const fisrtResult = searchResults[0]
       const link = fisrtResult.link
@@ -40,35 +38,31 @@ export const getSearchResult = (text) => {
 
 export const parseAmazonProducts = (link) => {
   return new Promise(async (resolve, reject) => {
-    try {
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox'],
-        // 'ignoreHTTPSErrors': true
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox'],
+      // 'ignoreHTTPSErrors': true
+    });
+    let page = await browser.newPage();
+    await page.goto(link);
+
+    const searchResults = await page.evaluate(() => {
+      const results = [];
+      [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
+        const a = result.getElementsByTagName('h2')[0].querySelector('a')
+        const title = a.getElementsByTagName('span')[0]?.innerText
+        const link = 'https://www.amazon.com' + a.getAttribute('href');
+        const imageUrl = result.getElementsByTagName('img')[0]?.src
+        const priceEl = result.querySelector('.a-price .a-offscreen')
+        const price = priceEl ? priceEl.innerText : ''
+        results.push({ link, title, imageUrl, price });
       });
-      let page = await browser.newPage();
-      await page.goto(link);
   
-      const searchResults = await page.evaluate(() => {
-        const results = [];
-        [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
-          const a = result.getElementsByTagName('h2')[0].querySelector('a')
-          const title = a.getElementsByTagName('span')[0]?.innerText
-          const link = 'https://www.amazon.com' + a.getAttribute('href');
-          const imageUrl = result.getElementsByTagName('img')[0]?.src
-          const priceEl = result.querySelector('.a-price .a-offscreen')
-          const price = priceEl ? priceEl.innerText : ''
-          results.push({ link, title, imageUrl, price });
-        });
+      return results;
+    });
     
-        return results;
-      });
-      
-      await browser.close();
-  
-      resolve(searchResults);
-    } catch (error) {
-      reject(error)
-    }
+    await browser.close();
+
+    resolve(searchResults);
   })
 }
