@@ -26,10 +26,20 @@ export const getSearchResult = (text) => {
       
       await browser.close();
 
-      const fisrtResult = searchResults[0]
-      const link = fisrtResult.link
-      const isProduct = link.includes('/dp/')
-      resolve({ isProduct, link })
+      const productLink = searchResults.find(el => {
+        if (el.link.includes('/dp/')) {
+          return false
+        } else {
+          return true
+        }
+      })
+
+      let link = productLink.link;
+      if (!link.includes('s?k=')) {
+        link = `https://www.amazon.com/60th-birthday-gifts-women/s?k=${text.split(' ').join('+')}`
+      }
+
+      resolve(link)
     } catch (error) {
       reject(error)
     }
