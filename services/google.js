@@ -14,6 +14,7 @@ export const getSearchResult = (text) => {
       await page.goto(url);
 
       const searchResults = await page.evaluate(() => {
+        console.log('evaluate');
         const results = [];
         document.querySelectorAll('.g').forEach((result) => {
           const title = result.querySelector('h3').textContent;
@@ -46,10 +47,7 @@ export const parseAmazonProducts = (link) => {
     let page = await browser.newPage();
     await page.goto(link);
 
-    console.log('parseAmazonProducts');
-
     const searchResults = await page.evaluate(() => {
-      console.log('evaluate');
       const results = [];
       [...document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')].filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
         const a = result.getElementsByTagName('h2')[0].querySelector('a')
