@@ -35,6 +35,7 @@ export default class ChatGPTService {
         const listProduct = products.slice(0, 31).map((product, index) => {
           return `${index + 1}. ${product.title}. ${product.price}.`
         })
+        console.log(listProduct);
         const completion = await this.openai.chat.completions.create({
           messages: [
             { 
