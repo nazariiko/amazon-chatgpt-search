@@ -32,7 +32,7 @@ export default class ChatGPTService {
   getBestMatchesProducts = (search, products) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const listProduct = products.map((product, index) => {
+        const listProduct = products.slice(0, 31).map((product, index) => {
           return `${index + 1}. ${product.title}. ${product.price}.`
         })
         const completion = await this.openai.chat.completions.create({
