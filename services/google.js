@@ -93,7 +93,10 @@ export const parseAmazonProducts2 = (link) => {
     const results = [];
     const els = dom.window.document.querySelectorAll('.s-result-item[data-component-type="s-search-result"]')
     Array.from(els).filter(el => el.hasAttribute('data-uuid')).forEach((result) => {
-      const a = result.getElementsByTagName('h2')[0].querySelector('a')
+      let a = result.getElementsByTagName('h2')[0].querySelector('a')
+      if (!a) {
+        a = result.getElementsByTagName('h2')[1].querySelector('a')
+      }
       const title = a.getElementsByTagName('span')[0]?.innerHTML
       const link = 'https://www.amazon.com' + a.getAttribute('href');
       const imageUrl = result.getElementsByTagName('img')[0]?.src
