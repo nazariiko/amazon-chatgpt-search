@@ -88,6 +88,7 @@ export const parseAmazonProducts = (link) => {
 export const parseAmazonProducts2 = (link) => {
   return new Promise(async (resolve, reject) => {
     const response = await axios.get(`https://api.scraperapi.com/?api_key=${process.env.SCRAPPER_API}&url=${link}`)
+    console.log(response);
     const html = response.data;
     const dom = new JSDOM(html);
     const results = [];
