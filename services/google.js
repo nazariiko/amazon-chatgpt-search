@@ -26,7 +26,6 @@ export const getSearchResult = (text) => {
       });
       
       await browser.close();
-
       const productLink = searchResults.find(el => {
         if (el.link.includes('/dp/')) {
           return false
@@ -35,9 +34,10 @@ export const getSearchResult = (text) => {
         }
       })
 
-      let link = productLink.link;
-      console.log(link);
-      if (!link.includes('s?k=')) {
+      let link = productLink?.link;
+      if (!link) {
+        link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
+      } else if (!link.includes('s?k=')) {
         link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
       }
 
