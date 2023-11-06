@@ -41,6 +41,8 @@ export const getSearchResult = (text) => {
         link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
       }
 
+      console.log(link);
+
       resolve(link)
     } catch (error) {
       reject(error)
