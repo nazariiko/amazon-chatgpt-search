@@ -55,6 +55,7 @@ export default class ChatGPTService {
           model: "gpt-4",
         });
         const result = completion.choices[0]['message']['content']
+        console.log(result);
         const resultArr = result.split('\n')
         resolve(resultArr)
       } catch (error) {
