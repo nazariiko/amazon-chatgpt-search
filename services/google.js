@@ -36,6 +36,7 @@ export const getSearchResult = (text) => {
       })
 
       let link = productLink.link;
+      console.log(link);
       if (!link.includes('s?k=')) {
         link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
       }

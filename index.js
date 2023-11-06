@@ -24,7 +24,7 @@ app.get('/search', async (req, res) => {
   let productResults;
 
   const link = await getSearchResult(searchTerm);
-  productResults = await parseAmazonProducts(link)
+  productResults = await parseAmazonProducts2(link);
 
   // productResults = await getProducts(searchTerm)
 
