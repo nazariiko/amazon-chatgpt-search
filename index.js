@@ -14,9 +14,9 @@ dotenv.config()
 const isProduction = process.env.IS_PRODUCTION
 
 const app = express();
-app.use(cors({
-  origin: '*'
-}));
+// app.use(cors({
+//   origin: '*'
+// }));
 let server;
 
 if (isProduction == 'true') {
