@@ -1,7 +1,9 @@
 import express from 'express';
+import { readFileSync } from "fs";
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { createServer } from 'http';
+import { createServer as createHTTP } from 'http';
+import { createServer as createHTTPS } from 'https';
 import { Server } from "socket.io";
 import ChatGPTService from './services/chatgpt.js';
 import { getSearchResult, parseAmazonProducts, parseAmazonProducts2 } from './services/google.js';
@@ -9,8 +11,20 @@ import { getProducts } from './services/amazon.js';
 
 dotenv.config()
 
+const isProduction = process.env.IS_PRODUCTION
+
 const app = express();
-const server = createServer(app);
+let server;
+
+if (isProduction == 'true') {
+  server = createHTTPS({
+    key: readFileSync("/etc/letsencrypt/live/abx123.com/privkey.pem"),
+    cert: readFileSync("/etc/letsencrypt/live/abx123.com/cert.pem")
+  }, app);
+} else {
+  server = createHTTP(app);
+}
+
 const io = new Server(server, {
   cors: {
     origin: "*",
