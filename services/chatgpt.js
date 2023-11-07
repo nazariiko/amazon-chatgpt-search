@@ -19,7 +19,7 @@ export default class ChatGPTService {
               content: `if it is about a gift, come up with a creative gift idea. if it's describing a problem, write a product name that will solve it. if it sounds like a question, only write the product name and no other words. otherwise, remove superlatives and the word ram and provide a simpler product search term for amazon.com. Do not omit key details. do not add adjectives or write anything else or add quotation marks. "$${text}"` 
             }
           ],
-          model: "gpt-4",
+          model: "gpt-4-1106-preview",
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '')
         console.log(result);
@@ -54,7 +54,7 @@ export default class ChatGPTService {
               // `
             }
           ],
-          model: "gpt-4",
+          model: "gpt-4-1106-preview",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
