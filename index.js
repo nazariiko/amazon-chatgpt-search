@@ -26,7 +26,7 @@ if (isProduction == 'true') {
 
 const io = new Server(server, {
   cors: {
-    origin: "*:*",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
@@ -80,11 +80,6 @@ app.get('/test', (req, res) => {
 })
 
 
-server.listen(PORT, () => {
-  console.log('Server runs');
-})
-
-
 io.of('/search').on('connection', (socket) => {
   console.log('A client connected to /search namespace');
 
@@ -92,3 +87,8 @@ io.of('/search').on('connection', (socket) => {
     console.log('A client disconnected from /search namespace');
   });
 });
+
+
+server.listen(PORT, () => {
+  console.log('Server runs');
+})
