@@ -14,10 +14,12 @@ dotenv.config()
 const isProduction = process.env.IS_PRODUCTION
 
 const app = express();
+app.use(cors({
+  origin: '*'
+}));
 let server;
 
 if (isProduction == 'true') {
-  console.log('isProduction');
   server = createHTTPS({
     key: readFileSync("/etc/letsencrypt/live/abx123.com/privkey.pem"),
     cert: readFileSync("/etc/letsencrypt/live/abx123.com/cert.pem")
@@ -32,9 +34,6 @@ const io = new Server(server, {
     methods: ["GET", "POST"]
   }
 });
-app.use(cors({
-  origin: '*'
-}));
 
 const PORT = 3000 || process.env.PORT
 const chatgptServiceInstance = new ChatGPTService();
