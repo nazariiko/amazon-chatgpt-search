@@ -17,6 +17,7 @@ const app = express();
 let server;
 
 if (isProduction == 'true') {
+  console.log('isProduction');
   server = createHTTPS({
     key: readFileSync("/etc/letsencrypt/live/abx123.com/privkey.pem"),
     cert: readFileSync("/etc/letsencrypt/live/abx123.com/cert.pem")
