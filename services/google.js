@@ -41,8 +41,6 @@ export const getSearchResult = (text) => {
         link = `https://www.amazon.com/s?k=${text.split(' ').join('+')}`
       }
 
-      console.log(link);
-
       resolve(link)
     } catch (error) {
       reject(error)
@@ -61,7 +59,7 @@ export const parseAmazonProducts = (link) => {
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36')
     await page.goto(link);
     const data = await page.evaluate(() => document.querySelector('*').outerHTML);
-    console.log(data);
+    // console.log(data);
 
     const searchResults = await page.evaluate(() => {
       const results = [];
@@ -88,7 +86,6 @@ export const parseAmazonProducts = (link) => {
 export const parseAmazonProducts2 = (link) => {
   return new Promise(async (resolve, reject) => {
     const response = await axios.get(`https://api.scraperapi.com/?api_key=${process.env.SCRAPPER_API}&url=${link}`)
-    console.log(response);
     const html = response.data;
     const dom = new JSDOM(html);
     const results = [];

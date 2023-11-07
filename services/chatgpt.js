@@ -22,7 +22,7 @@ export default class ChatGPTService {
           model: "gpt-4-1106-preview",
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '')
-        console.log(result);
+        // console.log(result);
         resolve(result)
       } catch (error) {
         reject(error)
@@ -36,7 +36,6 @@ export default class ChatGPTService {
         const listProduct = products.slice(0, 31).map((product, index) => {
           return `${index + 1}. ${product.title}. ${product.price}.`
         })
-        console.log(listProduct);
         const completion = await this.openai.chat.completions.create({
           messages: [
             { 
