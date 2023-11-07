@@ -45,13 +45,6 @@ export default class ChatGPTService {
                 ${listProduct.join(' ')}
                 which 3 of the above are the closest match for: "${search}"? If there are 2 same matches, pick the cheaper one. write only the numbers on separate lines do not write any words or sentences. prices are listed at the end, if necessary.
               `,
-              // content: `
-              //   which of the following list products most closely matches the description "${search}"?
-              //   arrange in order from most suitable. at least 3 products, but more is possible.
-              //   write only the numbers on separate lines. do not write any words or sentences . do not write "none of this items match the description".
-              //   prices are listed at the end, if necessary:
-              //   ${listProduct.join(' ')}
-              // `
             }
           ],
           model: "gpt-4-1106-preview",
