@@ -30,7 +30,7 @@ if (isProduction == 'true') {
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://shoppa.ai",
     methods: ["GET", "POST"]
   }
 });
