@@ -88,6 +88,6 @@ io.of('/search').on('connection', (socket) => {
 });
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log('Server runs');
 })
