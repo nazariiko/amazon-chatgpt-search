@@ -12,12 +12,7 @@ import { getProducts } from './services/amazon.js';
 dotenv.config()
 
 const isProduction = process.env.IS_PRODUCTION
-
 const app = express();
-app.use(cors({
-  origin: 'https://shoppa.ai',
-  methods: ['GET', 'POST'],
-}));
 let server;
 
 if (isProduction == 'true') {
@@ -31,10 +26,16 @@ if (isProduction == 'true') {
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "*:*",
     methods: ["GET", "POST"]
   }
 });
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+}));
+
 
 const PORT = 3000 || process.env.PORT
 const chatgptServiceInstance = new ChatGPTService();
@@ -79,6 +80,11 @@ app.get('/test', (req, res) => {
 })
 
 
+server.listen(PORT, () => {
+  console.log('Server runs');
+})
+
+
 io.of('/search').on('connection', (socket) => {
   console.log('A client connected to /search namespace');
 
@@ -86,8 +92,3 @@ io.of('/search').on('connection', (socket) => {
     console.log('A client disconnected from /search namespace');
   });
 });
-
-
-server.listen(PORT, () => {
-  console.log('Server runs');
-})
