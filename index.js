@@ -14,9 +14,7 @@ dotenv.config()
 const isProduction = process.env.IS_PRODUCTION
 
 const app = express();
-// app.use(cors({
-//   origin: '*'
-// }));
+app.use(cors());
 let server;
 
 if (isProduction == 'true') {
@@ -30,7 +28,7 @@ if (isProduction == 'true') {
 
 const io = new Server(server, {
   cors: {
-    origin: "https://shoppa.ai",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
