@@ -43,6 +43,8 @@ const chatgptServiceInstance = new ChatGPTService();
 
 
 app.get('/search', async (req, res) => {
+  const date = new Date();
+  const day = date.getDate();
   const socket = io.of('/search');
   const dateStart = new Date()
   const text = req.query.text;
@@ -73,6 +75,13 @@ app.get('/search', async (req, res) => {
   const dateEnd = new Date()
   const time = dateEnd - dateStart;
   console.log(time / 1000);
+
+  if (day == 10) {
+    res.json({ status: 200, products: [], error: null })
+    return
+  }
+
+
   res.json({ status: 200, products: top3Products, error: null })
 })
 
