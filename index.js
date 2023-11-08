@@ -76,8 +76,7 @@ app.get('/search', async (req, res) => {
   const time = dateEnd - dateStart;
   console.log(time / 1000);
 
-  console.log(day);
-  if (day == 9) {
+  if (day == 10) {
     res.json({ status: 200, products: [], error: null })
     return
   }
