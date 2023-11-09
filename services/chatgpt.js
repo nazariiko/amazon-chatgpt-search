@@ -16,7 +16,7 @@ export default class ChatGPTService {
           messages: [
             { 
               role: "system", 
-              content: `if it is about a gift, come up with a creative gift idea. if it's describing a problem, write a product name that will solve it. if it sounds like a question, only write the product name and no other words. otherwise, remove superlatives and the word ram and provide a simpler product search term for amazon.com. Do not omit key details. do not add adjectives or write anything else or add quotation marks. "$${text}"` 
+              content: `if it is about a gift, come up with a creative gift idea. if it's describing a problem, write a specific product name or kit that will solve it, whichever is easier. if it sounds like a question, only write the specific product name or kit and no other words. otherwise, remove superlatives and the word ram and provide a simpler product search term for http://amazon.com. do not add adjectives or write anything else or add quotation marks. Include price range as written if included. "$${text}"` 
             }
           ],
           model: "gpt-4-1106-preview",
