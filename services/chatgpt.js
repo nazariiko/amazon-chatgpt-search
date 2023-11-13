@@ -48,7 +48,7 @@ export default class ChatGPTService {
               content: content,
             }
           ],
-          model: "gpt-4",
+          model: "gpt-3.5-turbo-1106",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
