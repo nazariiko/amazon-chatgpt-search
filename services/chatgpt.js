@@ -33,7 +33,7 @@ export default class ChatGPTService {
   getBestMatchesProducts = (search, products) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const listProduct = products.slice(0, 17).map((product, index) => {
+        const listProduct = products.slice(0, 33).map((product, index) => {
           return `${index + 1}. ${product.title}, Price: ${product.price}.`
         })
         const completion = await this.openai.chat.completions.create({
@@ -46,7 +46,7 @@ export default class ChatGPTService {
               `,
             }
           ],
-          model: "gpt-4",
+          model: "gpt-4-1106-preview",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
