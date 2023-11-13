@@ -42,7 +42,7 @@ export default class ChatGPTService {
               role: "system", 
               content: `
                 ${listProduct.join(' ')}
-                "${search}". First remove superlatives and then find the exact matches. Then rank according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
+                Find the closest matches to "${search}". List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
               `,
             }
           ],
