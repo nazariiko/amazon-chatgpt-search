@@ -36,14 +36,16 @@ export default class ChatGPTService {
         const listProduct = products.slice(0, 17).map((product, index) => {
           return `${index + 1}. ${product.title}, Price: ${product.price}.`
         })
+        const content = `
+          ${listProduct.join(' ')}
+          "${search}". First remove superlatives and then find the exact matches. Then rank according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
+        `
+        console.log(content);
         const completion = await this.openai.chat.completions.create({
           messages: [
             { 
               role: "system", 
-              content: `
-                ${listProduct.join(' ')}
-                "${search}". First remove superlatives and then find the exact matches. Then rank according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
-              `,
+              content: content,
             }
           ],
           model: "gpt-4",
