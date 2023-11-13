@@ -74,6 +74,8 @@ app.get('/search', async (req, res) => {
   const time = dateEnd - dateStart;
   console.log(time / 1000);
 
+  console.log(top3Products);
+
   res.json({ status: 200, products: top3Products, error: null })
 })
 
