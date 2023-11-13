@@ -68,7 +68,7 @@ app.get('/search', async (req, res) => {
     finalProducts.push(productResults[+index - 1])
   })
 
-  const top3Products = finalProducts.slice(0, 3)
+  const top3Products = finalProducts.slice(0, 2)
 
   const dateEnd = new Date()
   const time = dateEnd - dateStart;

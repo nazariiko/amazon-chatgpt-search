@@ -16,10 +16,10 @@ export default class ChatGPTService {
           messages: [
             { 
               role: "system", 
-              content: `if it is about a gift, come up with a creative gift idea. if it's describing a problem, write a specific product name or kit that will solve it, whichever is easier. if it sounds like a question, only write the specific product name or kit and no other words. otherwise, remove superlatives and the word ram and provide a simpler product search term for http://amazon.com. do not add adjectives or write anything else or add quotation marks. Include price range as written if included. "$${text}"` 
+              content: `If the text is about a gift, come up with a creative gift idea. if it's describing a problem, or sounds like a question, find only one easiest to use specific product name and no other words. otherwise, remove superlatives and the word ram and provide a product search term for amazon.com. do not remove key words. do not add adjectives or write any other words or add quotation marks. Include price as it is written and brand name and model name if included: "${text}"` 
             }
           ],
-          model: "gpt-4-1106-preview",
+          model: "gpt-4",
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '')
         // console.log(result);
@@ -33,8 +33,8 @@ export default class ChatGPTService {
   getBestMatchesProducts = (search, products) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const listProduct = products.slice(0, 47).map((product, index) => {
-          return `${index + 1}. ${product.title}. ${product.price}.`
+        const listProduct = products.slice(0, 17).map((product, index) => {
+          return `${index + 1}. ${product.title}, Price: ${product.price}.`
         })
         const completion = await this.openai.chat.completions.create({
           messages: [
@@ -42,11 +42,11 @@ export default class ChatGPTService {
               role: "system", 
               content: `
                 ${listProduct.join(' ')}
-                which 3 of the above are the closest match for: "${search}"? If there are 2 same matches, pick the cheaper one. write only the numbers on separate lines do not write any words or sentences. prices are listed at the end, if necessary.
+                "${search}". First remove superlatives and then find the exact matches. Then rank according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
               `,
             }
           ],
-          model: "gpt-4-1106-preview",
+          model: "gpt-4",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
