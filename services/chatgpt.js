@@ -33,7 +33,7 @@ export default class ChatGPTService {
   getBestMatchesProducts = (search, products) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const listProduct = products.slice(0, 33).map((product, index) => {
+        const listProduct = products.slice(0, 17).map((product, index) => {
           return `${index + 1}. ${product.title}, Price: ${product.price}.`
         })
         const completion = await this.openai.chat.completions.create({
@@ -42,11 +42,11 @@ export default class ChatGPTService {
               role: "system", 
               content: `
                 ${listProduct.join(' ')}
-                Find the closest matches to "${search}". List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
+                "${search}". First remove superlatives and then find the exact matches. Then rank according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
               `,
             }
           ],
-          model: "gpt-4-1106-preview",
+          model: "gpt-4",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
