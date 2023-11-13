@@ -16,7 +16,7 @@ export default class ChatGPTService {
           messages: [
             { 
               role: "system", 
-              content: `If the text is about a gift, come up with a creative gift idea. if it's describing a problem, or sounds like a question, find only one easiest to use specific product name and no other words. otherwise, just remove superlatives, the word "ram", and write the words leftover. do not add quotation marks. Include price as it is written and brand name and model name if included: "${text}"` 
+              content: `If the text is about a gift, come up with a creative gift idea. if it's describing a problem, or sounds like a question, find only one easiest to use specific product name and no other words. otherwise, just remove superlatives and the word "ram" and do not remove the remaining words or rewrite them. do not add quotation marks. Include price as it is written and brand name and model name if included: "${text}"` 
             }
           ],
           model: "gpt-4",
