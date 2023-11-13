@@ -22,7 +22,7 @@ export default class ChatGPTService {
           model: "gpt-4",
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '')
-        // console.log(result);
+        console.log(result);
         resolve(result)
       } catch (error) {
         reject(error)
