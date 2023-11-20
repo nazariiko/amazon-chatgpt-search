@@ -38,7 +38,7 @@ export default class ChatGPTService {
         })
         const content = `
           ${listProduct.join(' ')}
-          "${search}". Find the exact matches to the term. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
+          "${search}". First remove superlatives and then find the closest matches. Afterwards, rank them according to the superlatives. List 2 results. If there are 2 same matches, pick the cheaper one. opt for kits when available. write only the numbers on separate lines. do not write any words or sentences. prices are listed at the end, if necessary.
         `
         console.log(content);
         const completion = await this.openai.chat.completions.create({
