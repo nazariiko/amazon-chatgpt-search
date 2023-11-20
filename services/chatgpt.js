@@ -38,7 +38,7 @@ export default class ChatGPTService {
         })
         const content = `
           ${listProduct.join(' ')}
-          which 2 of the above are the exact matches for "${search}"? just write the listing numbers, do not write any other words.
+          which 2 of the above are the exact matches for "${search}"? just write the listing numbers, do not write any other words. each number on a new line.
         `
         console.log(content);
         const completion = await this.openai.chat.completions.create({
