@@ -62,7 +62,7 @@ app.get('/search', async (req, res) => {
 
   // productResults = await getProducts(searchTerm)
 
-  const bestMatchesProductsIndexes = await chatgptServiceInstance.getBestMatchesProducts(text, productResults);
+  const bestMatchesProductsIndexes = await chatgptServiceInstance.getBestMatchesProducts(searchTerm, productResults);
   const finalProducts = [];
   bestMatchesProductsIndexes.forEach(index => {
     finalProducts.push(productResults[+index - 1])
