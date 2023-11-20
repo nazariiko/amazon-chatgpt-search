@@ -48,7 +48,7 @@ export default class ChatGPTService {
               content: content,
             }
           ],
-          model: "gpt-4",
+          model: "gpt-4-1106-preview",
         });
         const result = completion.choices[0]['message']['content']
         console.log(result);
