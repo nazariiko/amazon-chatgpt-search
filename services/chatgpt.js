@@ -33,7 +33,7 @@ export default class ChatGPTService {
   getBestMatchesProducts = (search, products) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const listProduct = products.slice(0, 16).map((product, index) => {
+        const listProduct = products.slice(0, 32).map((product, index) => {
           return `${index + 1}. ${product.title}, Price: ${product.price}.\n`
         })
         const content = `
