@@ -16,7 +16,7 @@ export default class ChatGPTService {
           messages: [
             { 
               role: "system", 
-              content: `"${text}" if it's describing problem write only one specific product name that is a solution, no other words, if it's regarding a gift write a creative gift product idea, no other words, otherwise rewrite it as a simplified google search without price.` 
+              content: `"${text}" if it's describing problem write only one specific product name that is a solution, no other words, if it's regarding a gift write a creative gift product idea, no other words, otherwise just write the words without superlatives.` 
             }
           ],
           model: "gpt-4-1106-preview",
