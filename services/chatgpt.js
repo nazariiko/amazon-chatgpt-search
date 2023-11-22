@@ -16,7 +16,7 @@ export default class ChatGPTService {
           messages: [
             { 
               role: "system", 
-              content: `If the text is about a gift, come up with a creative gift idea. if it's describing a problem find only one easiest to use specific product name and no other words. otherwise, write the words as they are, without superlatives: "${text}"` 
+              content: `"${text}" if it's describing problem write only one specific product name that is a solution, no other words, if it's regarding a gift write a creative gift product idea, no other words, otherwise rewrite it as a simplified google search without price.` 
             }
           ],
           model: "gpt-4-1106-preview",
