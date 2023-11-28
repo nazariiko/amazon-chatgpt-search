@@ -16,10 +16,10 @@ export default class ChatGPTService {
           messages: [
             {
               role: 'system',
-              content: `"${text}" if it's describing problem or something that needs to be fixed only write one specific product name that is a solution, no other words, if it's regarding a gift write a creative gift product idea, no other words, otherwise only write the exact phrase again without superlatives or pricing, with only adjectives and nouns.`,
+              content: `If the following phrase regarding a gift, only write a creative gift product idea, no other words. if its regarding a product only write one specific product name that is a solution, no other words. if its describing a problem or something that needs to be fixed, only write the exact phrase again without superlatives or pricing, with only adjectives and nouns: "${text}"`,
             },
           ],
-          model: 'gpt-3.5-turbo-1106',
+          model: 'gpt-4-1106-preview',
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '');
         console.log(result);
@@ -48,7 +48,7 @@ export default class ChatGPTService {
               content: content1,
             },
           ],
-          model: 'gpt-3.5-turbo-1106',
+          model: 'gpt-4-1106-preview',
         });
         const result1 = response1.choices[0]['message']['content'];
         console.log(result1);
