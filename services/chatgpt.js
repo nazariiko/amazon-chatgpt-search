@@ -17,10 +17,7 @@ export default class ChatGPTService {
             {
               role: 'system',
               content: `
-                "${text}" if it's describing a problem write 1. if its regarding a gift write 2. otherwise write 0.
-                2. write a creative gift product idea, no other words
-                1. if its a technology related product, just remove superlatives from the phrase. otherwise list a specific product. do not write any other words
-                0. remove superlatives
+                "${text}" if it's describing a problem write if its a technology related product, just remove superlatives from the phrase. otherwise list a specific product. do not write any other words. if its regarding a gift write a creative gift product idea, no other words. otherwise write remove superlatives.
               `,
             },
           ],
