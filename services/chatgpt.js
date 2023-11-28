@@ -16,7 +16,12 @@ export default class ChatGPTService {
           messages: [
             {
               role: 'system',
-              content: `If the following phrase regarding a gift, only write a creative gift product idea, no other words. if its regarding a product only write one specific product name that is a solution, no other words. if its describing a problem or something that needs to be fixed, only write the exact phrase again without superlatives or pricing, with only adjectives and nouns: "${text}"`,
+              content: `
+                "${text}" if it's describing a problem write 1. if its regarding a gift write 2. otherwise write 0.
+                2. write a creative gift product idea, no other words
+                1. if its a technology related product, just remove superlatives from the phrase. otherwise list a specific product. do not write any other words
+                0. remove superlatives
+              `,
             },
           ],
           model: 'gpt-4-1106-preview',
@@ -38,7 +43,7 @@ export default class ChatGPTService {
         });
         const content1 = `
           ${listProduct.join(' ')}
-          which of the above are matches for "${searchTerm}"? just write the listing numbers, do not write any other words.
+          which of the above are the exact matches for "${searchTerm}"? just write the listing numbers, do not write any other words.
         `;
         console.log(content1);
         const response1 = await this.openai.chat.completions.create({
@@ -54,7 +59,7 @@ export default class ChatGPTService {
         console.log(result1);
 
         const content2 = `
-          which 2 of those are the "${search}"? only write the listing numbers on separate lines. do not write any words.
+          from those results, which 2 are the "${search}"? only write the listing numbers on separate lines
         `;
 
         const response2 = await this.openai.chat.completions.create({
