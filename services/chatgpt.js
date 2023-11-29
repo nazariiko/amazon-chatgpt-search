@@ -17,10 +17,7 @@ export default class ChatGPTService {
             {
               role: 'system',
               content: `
-                "${text}" if it has a verb, write the number 1 only. if its regarding a gift write the number 2 only. otherwise write the number 0 only.
-                2 = write a creative gift product idea, no other words
-                1 = if its a technology related product, just remove superlatives from the phrase. otherwise list a specific product that is a solution. do not write any other words. do not write the words "refurbished" or "affordable".
-                0 = write the phrase without superlatives. do not write the words "refurbished" or "affordable".
+                "${text}" if it has a verb: if its a technology related product, just remove superlatives from the phrase. otherwise list a specific product that is a solution. do not write any other words. do not write the words "refurbished" or "affordable". if its regarding a gift write only a creative gift product idea, no other words. otherwise write only the phrase without superlatives. do not write the words "refurbished" or "affordable".
               `,
             },
           ],
