@@ -21,7 +21,7 @@ export default class ChatGPTService {
               `,
             },
           ],
-          model: 'gpt-4',
+          model: 'gpt-4-1106-preview',
         });
         const result = completion.choices[0]['message']['content'].replaceAll('"', '');
         console.log(result);
@@ -50,7 +50,7 @@ export default class ChatGPTService {
               content: content1,
             },
           ],
-          model: 'gpt-4',
+          model: 'gpt-4-1106-preview',
         });
         const result1 = response1.choices[0]['message']['content'];
         console.log(result1);
@@ -74,7 +74,7 @@ export default class ChatGPTService {
               content: content2,
             },
           ],
-          model: 'gpt-4',
+          model: 'gpt-4-1106-preview',
         });
 
         const result2 = response2.choices[0]['message']['content'];
