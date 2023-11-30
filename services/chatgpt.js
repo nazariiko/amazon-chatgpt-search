@@ -40,7 +40,7 @@ export default class ChatGPTService {
         });
         const content1 = `
           ${listProduct.join(' ')}
-          which of the above are matches for "${searchTerm}"? just write the listing numbers, do not write any other words. skip any listings without price.
+          which of the above are closest matches for "${searchTerm}"? just write the listing numbers, do not write any other words. skip any listings without price.
         `;
         console.log(content1);
         const response1 = await this.openai.chat.completions.create({
