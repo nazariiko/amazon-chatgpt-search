@@ -40,7 +40,7 @@ export default class ChatGPTService {
         });
         const content1 = `
           ${listProduct.join(' ')}
-          which of the above are closest matches for "${searchTerm}"? just write the listing numbers, do not write any other words. skip any listings without price. Do not write "None of the listings match..."
+          which of the above are closest matches for "${searchTerm}"? only write the listing number on a separate line, no words. skip any listings without price. Do not write "None of the listings match..."
         `;
         console.log(content1);
         const response1 = await this.openai.chat.completions.create({
